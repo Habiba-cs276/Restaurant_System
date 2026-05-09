@@ -1,0 +1,25 @@
+﻿@model ApplicationUser
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+<form method="post" asp-action="Savecreate" class="">
+    <div>
+        <label asp-for="UserName"></label>
+        <input class="form-check form-control" asp-for="UserName" />
+    </div>
+    <div>
+        <label asp-for="Email"></label>
+        <input class="form-check form-control" asp-for="Email" />
+    </div>
+    <div>
+        <label asp-for="Password"></label>
+        <input class="form-check form-control" asp-for="Password" />
+    </div>
+    <input type="submit" value="Create" class="btn btn-success" />
+
+</form>
+<a asp-action="Index">Back To List</a>
+
+

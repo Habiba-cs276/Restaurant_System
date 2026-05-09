@@ -1,0 +1,26 @@
+﻿@model ApplicationUser
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Update</h1>
+
+<form method="post" asp-action="Saveupdate" class="">
+
+        <input hidden class="form-check form-control" asp-for="Id" />
+    <div>
+        <label asp-for="UserName"></label>
+        <input class="form-check form-control" asp-for="UserName" />
+    </div>
+    <div>
+        <label asp-for="Email"></label>
+        <input class="form-check form-control" asp-for="Email" />
+    </div>
+    <div>
+        <label asp-for="Password"></label>
+        <input class="form-check form-control" asp-for="Password" />
+    </div>
+    <input type="submit" value="Update" class="btn btn-success" />
+
+</form>
+<a asp-action="Index">Back To List</a>
