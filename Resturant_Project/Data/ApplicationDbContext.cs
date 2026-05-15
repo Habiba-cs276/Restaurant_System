@@ -4,14 +4,13 @@ using Resturant_Project.Models;
 
 namespace Resturant_Project.Data
 {
-    public class ApplicationDbContext : DbContext
-        //: IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
-        //public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        //    : base(options)
-        //{
-        //}
-       public ApplicationDbContext() : base() 
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+        public ApplicationDbContext() : base() 
         { }
         public DbSet<ApplicationUser> Users { get; set; }
 
@@ -28,13 +27,13 @@ namespace Resturant_Project.Data
             optionsBuilder.UseSqlServer("Data Source=LAPTOP-S9D8G1TD\\SQLEXPRESS;Initial Catalog=Resturantdb;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
             base.OnConfiguring(optionsBuilder);
         }
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-        //    modelBuilder.Entity<ProductIngredient>()
-        //        .HasKey(pi => new { pi.ProductId, pi.IngredientId });
+            modelBuilder.Entity<ProductIngredient>()
+                .HasKey(pi => new { pi.ProductId, pi.IngredientId });
 
-        //}
+        }
     }
 }

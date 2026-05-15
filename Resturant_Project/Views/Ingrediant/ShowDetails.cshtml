@@ -1,0 +1,38 @@
+﻿@model Ingredient
+
+@{
+    ViewData["Title"] = "ShowDetails";
+}
+
+<h1>ShowDetails</h1>
+
+<h4>Products Made With Ingredient</h4>
+<hr />
+<div>
+    @if(Model.ProductIngredients!=null&&Model.ProductIngredients.Any())
+    {
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var productIngredient in Model.ProductIngredients)
+                {
+                    <tr>
+                        <td>@productIngredient.Product.Name</td>
+                        <td>@productIngredient.Product.Description</td>
+                        <td>@productIngredient.Product.Price</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IngredientId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

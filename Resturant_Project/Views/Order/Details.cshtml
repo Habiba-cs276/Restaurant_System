@@ -1,0 +1,45 @@
+﻿@model Order
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <table class="table-bordered">
+        <thead>
+            <tr>
+                <th>Order Id</th>
+                <th>OrderDate</th>
+                <th>TotalAmount</th>
+                <th>User Name</th>
+                <th>OrderItems</th>
+
+            </tr>
+        </thead>
+        <tbody>
+          <tr>
+                <td>@Model.OrderId</td>
+                <td>@Model.OrderDate</td>
+                <td>@Model.TotalAmount</td>
+                @* <td>@Model.User.UserName</td> *@
+               
+                <td>
+                    @foreach(var item in Model.OrderItems)
+                    {
+                        <h5>@item.Product.Name</h5>
+                    }
+
+                </td>
+
+         </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.OrderId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

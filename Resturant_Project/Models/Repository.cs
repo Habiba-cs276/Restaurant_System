@@ -1,31 +1,63 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+using Resturant_Project.Data;
+using Resturant_Project.Models.Specifications;
+
 namespace Resturant_Project.Models
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        public Task AddAsync(T entity)
+        protected ApplicationDbContext _Context;
+        private DbSet<T> _dbSet; 
+        public Repository(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _Context = context; 
+            _dbSet= context.Set<T>();   
+        }
+        public async Task AddAsync(T entity)
+        {
+         await _dbSet.AddAsync(entity); 
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            T? entity;
+            entity = await _dbSet.FindAsync(id);
+            if(entity != null) 
+           _dbSet.Remove(entity);
         }
 
-        public Task<List<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            throw new NotImplementedException();
+          return await _dbSet.ToListAsync();    
         }
 
-        public Task<T> GetByIdAsync(int id, QueryOptions<T> options)
+        public async Task<T> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+          return await _dbSet.FindAsync(id);
         }
 
-        public Task UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+             _dbSet.Update(entity);
+        }
+        public void Save()
+        {
+            _Context.SaveChanges(); 
+        }
+
+        public async Task<IEnumerable<T>> GetAllWithSpecAsync(ISpecification<T> specification)
+        {
+            var BaseQuery = _dbSet;
+            var Query = EvaluatorSpecification.GenerateQuery(BaseQuery, specification); 
+             return await Query.ToListAsync();  
+        }
+
+        public async Task<T> GetByIdWithSpecAsync(int id, ISpecification<T> specification)
+        {
+            var BaseQuery = _dbSet;
+            var Query = EvaluatorSpecification.GenerateQuery(BaseQuery, specification);
+            return await Query.FirstOrDefaultAsync();
         }
     }
 }

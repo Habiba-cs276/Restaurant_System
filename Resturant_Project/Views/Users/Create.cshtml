@@ -1,4 +1,4 @@
-﻿@model ApplicationUser
+﻿@model CreateUserVM
 @{
     ViewData["Title"] = "Create";
 }
@@ -6,8 +6,8 @@
 <h1>Create</h1>
 <form method="post" asp-action="Savecreate" class="">
     <div>
-        <label asp-for="UserName"></label>
-        <input class="form-check form-control" asp-for="UserName" />
+        <label asp-for="FullName"></label>
+        <input class="form-check form-control" asp-for="FullName" />
     </div>
     <div>
         <label asp-for="Email"></label>

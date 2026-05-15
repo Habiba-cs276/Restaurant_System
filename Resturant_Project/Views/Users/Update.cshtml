@@ -1,16 +1,16 @@
-﻿@model ApplicationUser
+﻿@model CreateUserVM
 @{
     ViewData["Title"] = "Update";
 }
 
 <h1>Update</h1>
 
-<form method="post" asp-action="Saveupdate" class="">
+<form method="post" asp-action="edit" class="">
 
-        <input hidden class="form-check form-control" asp-for="Id" />
+        <input hidden class="form-check form-control" asp-for="id" />
     <div>
-        <label asp-for="UserName"></label>
-        <input class="form-check form-control" asp-for="UserName" />
+        <label asp-for="FullName"></label>
+        <input class="form-check form-control" asp-for="FullName" />
     </div>
     <div>
         <label asp-for="Email"></label>
